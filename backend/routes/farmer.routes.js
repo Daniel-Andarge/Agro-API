@@ -9,5 +9,8 @@ module.exports = app => {
      // Retrieve a single Farmer with id
     router.get("/:id", farmers.findOne);
 
+     // Update a Farmer with id
+    router.put("/:id", farmers.update);
+
 app.use('/api/farmers', router);
 }

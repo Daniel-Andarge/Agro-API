@@ -45,3 +45,28 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+// Update a Farmer by the id in the request
+exports.update = (req, res) => {
+  const id = req.params.id;
+
+  Farmer.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Farmer was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update Farmer with id=${id}. Maybe farmer was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating farmer with id=" + id
+      });
+    });
+};
