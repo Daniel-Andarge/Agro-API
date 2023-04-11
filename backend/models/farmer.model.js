@@ -5,13 +5,13 @@ const  Farmer = sequelize.define('farmer', {
       type: Sequelize.INTEGER,
       primaryKey: true
     },
-    firstName: {
+    firstname: {
       type: Sequelize.STRING
     },
-    lastName: {
+    lastname: {
       type: Sequelize.STRING
     },
-    farmType: {
+    farmtype: {
       type: Sequelize.STRING
     },
     product: {
@@ -23,9 +23,9 @@ const  Farmer = sequelize.define('farmer', {
     address: {
       type: Sequelize.STRING
     },
-    phone: {
+   /*  phone: {
       type: Sequelize.INTEGER
-    }
+    } */
   });
   
     return Farmer;

@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Agro API service." });
 });
 
-require("./routes/farmer.routes")
+require("./routes/farmer.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
