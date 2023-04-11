@@ -3,8 +3,11 @@ module.exports = app => {
 
     var router = require('express').Router();
 
-
+     // Retrieve all Farmers
     router.get("/", farmers.findAll);
 
-    app.use('/api/farmers', router);
+     // Retrieve a single Farmer with id
+    router.get("/:id", farmers.findOne);
+
+app.use('/api/farmers', router);
 }
