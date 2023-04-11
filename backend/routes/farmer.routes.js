@@ -3,6 +3,9 @@ module.exports = app => {
 
     var router = require('express').Router();
 
+     // Create a new Farmer
+    router.post("/", farmers.create);
+    
      // Retrieve all Farmers
     router.get("/", farmers.findAll);
 
@@ -14,6 +17,9 @@ module.exports = app => {
 
       // Delete a Farmer with id
     router.delete("/:id", farmers.delete);
+
+     // Delete all Farmers
+    router.delete("/", farmers.deleteAll);
 
 
 app.use('/api/farmers', router);

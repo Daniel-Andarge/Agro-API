@@ -3,10 +3,38 @@ const Farmer = db.farmers;
 const Op = db.Sequelize.Op;
 
 
+// Create and Save a new Farmer
+exports.create = (req, res) => {
+  // Validate request
+  if (!req.body.firstName) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+  }
 
+  // Create a Farmer
+  const farmer = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    farmType: req.body.farmType,
+    product: req.body.product,
+    city: req.body.city,
+    address: req.body.address,
+  };
 
-
-
+  // Save Farmer in the database
+  Farmer.create(farmer)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Farmer."
+      });
+    });
+};
 
 // Retrieve all Farmers from the database.
 exports.findAll = (req, res) => {
@@ -92,6 +120,23 @@ exports.delete = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: "Could not delete Farmer with id=" + id
+      });
+    });
+};
+
+// Delete all Farmers from the database.
+exports.deleteAll = (req, res) => {
+  Tutorial.destroy({
+    where: {},
+    truncate: false
+  })
+    .then(nums => {
+      res.send({ message: `${nums} Farmers were deleted successfully!` });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while removing all farmers."
       });
     });
 };
