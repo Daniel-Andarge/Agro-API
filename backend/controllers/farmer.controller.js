@@ -70,3 +70,28 @@ exports.update = (req, res) => {
       });
     });
 };
+
+// Delete a Farmer with the specified id in the request
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Farmer.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Farmer was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Farmer with id=${id}. Maybe Farmer was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Farmer with id=" + id
+      });
+    });
+};

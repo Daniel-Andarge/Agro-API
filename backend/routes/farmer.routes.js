@@ -12,5 +12,9 @@ module.exports = app => {
      // Update a Farmer with id
     router.put("/:id", farmers.update);
 
+      // Delete a Farmer with id
+    router.delete("/:id", farmers.delete);
+
+
 app.use('/api/farmers', router);
 }
