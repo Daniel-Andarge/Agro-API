@@ -11,7 +11,7 @@ const Op = db.Sequelize.Op;
 // Retrieve all Farmers from the database.
 exports.findAll = (req, res) => {
     const name = req.query.name;
-    var condition = name ? { title: { [Op.like]: `%${name}%` } } : null;
+    var condition = name ? { name: { [Op.like]: `%${name}%` } } : null;
   
     Farmer.findAll({ where: condition })
       .then(data => {
