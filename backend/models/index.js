@@ -19,6 +19,6 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.tutorials = require("./farmer.model.js")(sequelize, Sequelize);
+db.farmers = require("./farmer.model.js")(sequelize, Sequelize);
 
 module.exports = db;
