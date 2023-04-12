@@ -2,7 +2,7 @@ module.exports = app => {
     //const farmers = require("../controllers/farmer.controller");
 
     const router = require('express').Router();
-    const {getAllFarmers,insertFarmer, getOneFarmer} = require('../controllers/farmer.controller')
+    const {getAllFarmers,insertFarmer, getOneFarmer, updateFarmer, deleteFarmer} = require('../controllers/farmer.controller')
 
 
 
@@ -69,12 +69,13 @@ module.exports = app => {
       const product = req.body.farmer.product;
       const city = req.body.farmer.city;
       const address = req.body.farmer.address;
+      const id = req.body.farmer.id;
    
-            if (!firstname || !lastname || !farmtype || !product || !city || !address) {
+            if (!firstname || !lastname || !farmtype || !product || !city || !address || !id) {
             return res.sendStatus(400);
      }
   
-        const farmer =  await updateEmployee(firstname, lastname, farmtype, product, city, address)
+        const farmer =  await updateFarmer(firstname, lastname, farmtype, product, city, address,id)
         .then(()=>{return getOneFarmer(id);});
         res.json({farmer: farmer});
          
@@ -83,6 +84,17 @@ module.exports = app => {
         res.sendStatus(400);
     }
  });
+
+ router.delete('/:id', async (req, res, next)=>{
+  try{
+      const id = req.params.id;
+      const response = await deleteFarmer(id);
+      return res.sendStatus(204);
+
+  } catch(e){
+      console.log(e);
+  }
+})
   // module.exports = apiRouter;
 
   /*    // Create a new Farmer

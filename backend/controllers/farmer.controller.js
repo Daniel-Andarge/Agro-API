@@ -7,7 +7,8 @@ module.exports ={
   insertFarmer,
   getAllFarmers,
   updateFarmer,
-  getOneFarmer
+  getOneFarmer,
+  deleteFarmer
 };
 
 async function insertFarmer(firstname, lastname, farmtype, product, city, address) {
@@ -38,7 +39,14 @@ async function getOneFarmer(id) {
    
  }
  
-
+ async function deleteFarmer(id) {
+ 
+  const farmer = await getOneFarmer(id);
+    
+   await farmer.destroy();
+ 
+ 
+  }
 
 
 
