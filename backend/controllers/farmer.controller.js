@@ -4,23 +4,40 @@ const db = require('../models/index');
 const Farmer = db.farmers;
 
 module.exports ={
-  getAllFarmers
+  insertFarmer,
+  getAllFarmers,
+  updateFarmer,
+  getOneFarmer
 };
 
-
-
-
-async function getAllFarmers() {
+async function insertFarmer(firstname, lastname, farmtype, product, city, address) {
  
-  const farmers = await Farmer.findAll();
-    
-   return farmers;
+  await Farmer.create({firstname, lastname, farmtype, product, city, address});
  
+}
+
+
+ async function getAllFarmers() {
+      
+        const farmers = await Farmer.findAll();
+          
+        return farmers;
+        }
+
+async function getOneFarmer(id) {
+      
+          const farmer = await Farmer.findByPk(id);
+            
+          return farmer;
+        
+          }
+
+  async function updateFarmer (firstname, lastname, farmtype, product, city, address, id){
+   
+    await Farmer.update({firstname, lastname, farmtype, product, city, address}, { where: {id: id}});
+   
+ }
  
-  }
-
-
-
 
 
 
