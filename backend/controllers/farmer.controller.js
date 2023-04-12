@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Farmer
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.firstName) {
+  if (!req.body.firstname) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -15,9 +15,9 @@ exports.create = (req, res) => {
 
   // Create a Farmer
   const farmer = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    farmType: req.body.farmType,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    farmtype: req.body.farmtype,
     product: req.body.product,
     city: req.body.city,
     address: req.body.address,
@@ -113,7 +113,7 @@ exports.delete = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot delete Farmer with id=${id}. Maybe Farmer was not found!`
+          message: `Cannot delete Farmer! Farmer with id=${id} was not found!`
         });
       }
     })
