@@ -1,9 +1,23 @@
 module.exports = app => {
-    const farmers = require("../controllers/farmer.controller");
+    //const farmers = require("../controllers/farmer.controller");
 
-    var router = require('express').Router();
+    const router = require('express').Router();
+    const {getAllFarmers} = require('../controllers/farmer.controller')
 
-     // Create a new Farmer
+
+    router.get('/', async (req, res, next)=>{
+      try {
+          const farmers = await getAllFarmers();
+          res.status(200).json({farmers: farmers});
+      } catch(e) {
+          console.log(e);
+          res.sendStatus(500);
+      }
+   });
+
+  // module.exports = apiRouter;
+
+  /*    // Create a new Farmer
     router.post("/", farmers.create);
     
      // Retrieve all Farmers
@@ -20,7 +34,7 @@ module.exports = app => {
 
      // Delete all Farmers
     router.delete("/", farmers.deleteAll);
+*/
 
-
-app.use('/api/farmers', router);
+app.use('/api/farmers', router);  
 }

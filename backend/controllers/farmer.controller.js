@@ -1,4 +1,34 @@
-const db = require("../models");
+const db = require('../models/index');
+
+
+const Farmer = db.farmers;
+
+module.exports ={
+  getAllFarmers
+};
+
+
+
+
+async function getAllFarmers() {
+ 
+  const farmers = await Farmer.findAll();
+    
+   return farmers;
+ 
+ 
+  }
+
+
+
+
+
+
+
+
+
+
+/* const db = require("../models");
 const Farmer = db.farmers;
 const Op = db.Sequelize.Op;
 
@@ -140,3 +170,4 @@ exports.deleteAll = (req, res) => {
       });
     });
 };
+ */

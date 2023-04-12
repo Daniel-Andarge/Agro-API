@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+//const apiRouter = require('./routes/farmer.routes')
 
 const app = express();
 
@@ -8,6 +9,8 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+//app.use('apiRouter', apiRouter);
 
 app.use(express.json());
 

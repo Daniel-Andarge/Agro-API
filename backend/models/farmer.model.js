@@ -8,13 +8,13 @@ const  Farmer = sequelize.define('farmer', {
       autoIncrement: true,
       primaryKey: true,
     },
-    firstName: {
+    firstname: {
       type: Sequelize.STRING
     },
-    lastName: {
+    lastname: {
       type: Sequelize.STRING
     },
-    farmType: {
+    farmtype: {
       type: Sequelize.STRING
     },
     product: {
