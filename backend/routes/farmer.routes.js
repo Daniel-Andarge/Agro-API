@@ -1,7 +1,7 @@
 module.exports = app => {
     const router = require('express').Router();
     const NodeCache = require('node-cache')
-    const { reqRateLimiter } = require('../middlewares/rateLimiter/reqRateLimiter')
+    const { reqRateLimiter } = require('../middlewares/reqRateLimiter')
     const {getAllFarmers,
            insertFarmer, 
            getOneFarmer, 
@@ -56,7 +56,7 @@ module.exports = app => {
         next(); // go to router.get('/:id')
     } catch(e) {
         console.log(e);
-        res.sendStatus(404);
+        res.sendStatus(404).json({ message:})
     }
  });
   
