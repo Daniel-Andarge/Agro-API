@@ -1,12 +1,18 @@
 module.exports = app => {
-    //const farmers = require("../controllers/farmer.controller");
-
     const router = require('express').Router();
-    const {getAllFarmers,insertFarmer, getOneFarmer, updateFarmer, deleteFarmer} = require('../controllers/farmer.controller')
+    const NodeCache = require('node-cache')
+    const { reqRateLimiter } = require('../middlewares/rateLimiter/reqRateLimiter')
+    const {getAllFarmers,
+           insertFarmer, 
+           getOneFarmer, 
+           updateFarmer,
+           deleteFarmer} = require('../controllers/farmer.controller')
+    
 
 
+    const nodeCache = new NodeCache({stdTTL: 360, maxKeys: 10, useClones: false})
 
-    router.post('/',  async (req, res, next)=>{
+    router.post('/', async (req, res, next)=>{
       try{
           const firstname = req.body.farmer.firstname;
           const lastname = req.body.farmer.lastname;
@@ -31,7 +37,8 @@ module.exports = app => {
    });
 
           // Retrieve all Farmers
-    router.get('/', async (req, res, next)=>{
+    router.get('/', reqRateLimiter,  async (req, res, next)=>{
+       
       try {
           const farmers = await getAllFarmers();
           res.status(200).json({farmers: farmers});
@@ -61,7 +68,7 @@ module.exports = app => {
 
 
 // Update a farmer
-   router.put('/:id',  async (req, res, next)=>{
+   router.put('/:farmerid',  async (req, res, next)=>{
     try{
       const firstname = req.body.farmer.firstname;
       const lastname = req.body.farmer.lastname;
@@ -71,7 +78,7 @@ module.exports = app => {
       const address = req.body.farmer.address;
       const id = req.body.farmer.id;
    
-            if (!firstname || !lastname || !farmtype || !product || !city || !address || !id) {
+            if (!firstname || !lastname || !farmtype || !product || !city || !address ) {
             return res.sendStatus(400);
      }
   

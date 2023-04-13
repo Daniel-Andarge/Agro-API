@@ -1,20 +1,16 @@
 const express = require("express");
 const cors = require("cors");
-//const apiRouter = require('./routes/farmer.routes')
-
 const app = express();
+//const { reqRateLimiter } = require('./middlewares/rateLimiter/reqRateLimiter')
 
 var corsOptions = {
   origin: "http://localhost:8081"
 };
 
 app.use(cors(corsOptions));
-
-//app.use('apiRouter', apiRouter);
-
 app.use(express.json());
-
 app.use(express.urlencoded({ extended: true }));
+//app.use(reqRateLimiter);
 
 const db = require("./models")
 db.sequelize.sync()
@@ -26,7 +22,7 @@ db.sequelize.sync()
   });
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Agro API service." });
+  res.json({ message: "Welcome to AgroAPI service." });
 });
 
 require("./routes/farmer.routes")(app);
