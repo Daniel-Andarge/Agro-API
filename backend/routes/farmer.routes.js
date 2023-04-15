@@ -1,6 +1,7 @@
 const redis = require('redis');
 const { farmers } = require('../models');
 const client = redis.createClient(6379);
+const cache =require('../middlewares/routeCache');
 
 module.exports = app => {
     const router = require('express').Router();
@@ -41,7 +42,7 @@ module.exports = app => {
    });
 
           // Retrieve all Farmers
-    router.get('/', reqRateLimiter,  async (req, res, next)=>{
+    router.get('/', cache(300), async (req, res, next)=>{
        
       try {
           const farmers = await getAllFarmers();
@@ -66,10 +67,8 @@ module.exports = app => {
   
  // Get a farmer
   
- router.get('/:id',  (req, res, next)=>{
-    const x = farmers;
-    client.setEx(id, 3600, x);
-
+ router.get('/:id', cache(300), (req, res, next)=>{
+  
     res.status(200).json({farmer: req.farmer});
  });
 
