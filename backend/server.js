@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 //const { reqRateLimiter } = require('./middlewares/rateLimiter/reqRateLimiter')
-
+const session = require('express-session');
 var corsOptions = {
   origin: "http://localhost:8081"
 };
@@ -11,6 +11,13 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(reqRateLimiter);
+app.use(session({
+  secret: 'keyboard cat',
+  cookie: {
+    sameSite: 'strict'
+  }
+}));
+
 
 const db = require("./models")
 db.sequelize.sync()

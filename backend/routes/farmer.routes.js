@@ -1,3 +1,7 @@
+const redis = require('redis');
+const { farmers } = require('../models');
+const client = redis.createClient(6379);
+
 module.exports = app => {
     const router = require('express').Router();
     const NodeCache = require('node-cache')
@@ -56,13 +60,16 @@ module.exports = app => {
         next(); // go to router.get('/:id')
     } catch(e) {
         console.log(e);
-        res.sendStatus(404).json({ message:})
+        res.sendStatus(404);
     }
  });
   
  // Get a farmer
   
  router.get('/:id',  (req, res, next)=>{
+    const x = farmers;
+    client.setEx(id, 3600, x);
+
     res.status(200).json({farmer: req.farmer});
  });
 
