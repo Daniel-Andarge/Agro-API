@@ -1,8 +1,5 @@
 const db = require('../models/index');
-
-
 const Farmer = db.farmers;
-
 module.exports ={
   insertFarmer,
   getAllFarmers,
@@ -16,8 +13,6 @@ async function insertFarmer(firstname, lastname, farmtype, product, city, addres
   await Farmer.create({firstname, lastname, farmtype, product, city, address});
  
 }
-
-
  async function getAllFarmers() {
       
         const farmers = await Farmer.findAll();

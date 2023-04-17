@@ -30,7 +30,7 @@ router.post('/',  reqRateLimiter, async (req, res, next)=>{
       }
    });
 
-// Get all Farmers
+// Retrieve all Farmers
 router.get('/',  reqRateLimiter, cache, async (req, res, next)=>{
        
       try {
@@ -58,20 +58,18 @@ router.param('id', async (req, res, next, id)=> {
     res.status(200).json({farmer: req.farmer});
  });
 
-// Get farmers by city.
- router.get('/:city',  reqRateLimiter, cache, async (req, res, next)=>{
+ router.get('/:price',  reqRateLimiter, cache, async (req, res, next)=>{
        
     try {
-        const farmers = await getByCity();
+        const farmers = await getAllFarmers();
         res.status(200).json({farmers: farmers});
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
     }
  });
-
 // Update farmer
- router.put('/:farmerid', reqRateLimiter, async (req, res, next)=>{
+   router.put('/:farmerid', reqRateLimiter, async (req, res, next)=>{
     try{
       const firstname = req.body.farmer.firstname;
       const lastname = req.body.farmer.lastname;

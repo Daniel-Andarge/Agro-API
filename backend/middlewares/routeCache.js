@@ -1,25 +1,29 @@
-const NodeCache = require("node-cache");
-
-const cache = new NodeCache();
+const NodeCache = require('node-cache');
+const cache = new NodeCache({stdTTL: 200, maxKeys: 10, useClones: false})
 
 module.exports = duration => (req, res, next) => {
-    if (req.method !== "GET") {
-      console.log("Cannot cache non-GET methods!");
-      return next();
+  if(req.method !== 'GET') {
+    // Clear cache on POST, PUT, DELETE of the same route
+    if(cache.has(req.originalUrl)){
+      console.log('Cache cleared');
+      cache.del(req.originalUrl);
     }
-    const key = req.originalUrl;
-    const cachedResponse = cache.get(key);
-  
-    if (cachedResponse) {
-      console.error(`Cache hit for ${key}`);
-      res.send(cachedResponse);
-    } else {
-      console.log(`Cache miss for ${key}`);
-      res.originalSend = res.send;
-      res.send = body => {
-        res.originalSend(body);
-        cache.set(key, body, duration);
-      };
-      next();
-    }
-  };
+    return next();
+  }
+  const key = req.originalUrl;
+  const cachedBody = cache.get(key);
+  if(cachedBody) {
+    // Send json response
+    console.log('Cache hit');
+    res.json(JSON.parse(cachedBody));
+  }else{
+    // Send response
+    console.log('Cache miss');
+    res.sendResponse = res.send;
+    res.send = body => {
+      cache.set(key, body, duration);
+      res.sendResponse(body);
+    };
+    next();
+  }
+};

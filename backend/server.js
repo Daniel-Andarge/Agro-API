@@ -1,21 +1,28 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const session = require('express-session');  // express-sessions
+const { v4: uuidv4 } = require('uuid'); //To call: uuidv4();
 //const { reqRateLimiter } = require('./middlewares/rateLimiter/reqRateLimiter')
-const session = require('express-session');
+
 var corsOptions = {
   origin: "http://localhost:8081"
 };
 
+// Configure Middlewares
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(reqRateLimiter);
+
 app.use(session({
-  secret: 'keyboard cat',
-  cookie: {
-    sameSite: 'strict'
-  }
+  genid: function (req) {
+	return uuidv4();
+  },
+  secret: 'r8q,+&1LM3)CD*zAGpx1xm{NeQhc;#',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60 * 60 * 1000 } 
 }));
 
 
