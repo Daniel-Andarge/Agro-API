@@ -5,13 +5,9 @@ const {getAllFarmers,
        insertFarmer, 
        getOneFarmer, 
        updateFarmer,
-       deleteFarmer
-    } = require('../controllers/farmer.controller')
+       deleteFarmer} = require('../controllers/farmer.controller')
 
 module.exports = app => {
-    app.get('/:firstname', (req, res, next) => {
-        res.send(req.params);
-      })
 // Add farmer
 router.post('/',  reqRateLimiter, async (req, res, next)=>{
       try{
@@ -38,7 +34,6 @@ router.post('/',  reqRateLimiter, async (req, res, next)=>{
 router.get('/',cache(100), async (req, res, next)=>{
        
       try {
-
           const farmers = await getAllFarmers();
           res.status(200).json({farmers: farmers});
       } catch(e) {
@@ -62,28 +57,18 @@ router.param('id', async (req, res, next, id)=> {
  router.get('/:id', async   (req, res, next)=>{
     res.status(200).json({farmer: req.farmer});
  });
-// Search farmers by city.
 
-/* router.get('/search', async   (req, res)=>{
-    let data = await Farmer.find()
-    res.status(200).json({farmer: req.farmer});
- });
- */
-
-/*  router.param('city', async (req, res, next, city)=> {
-    try{
-        const city = await getFarmerscity(req.params.city);
-        req.city = city;
-        next(); // go to router.get('/:id')
+// Get farmers by city.
+ router.get('/:city',  reqRateLimiter,cache(100), async (req, res, next)=>{
+       
+    try {
+        const farmers = await getByCity();
+        res.status(200).json({farmers: farmers});
     } catch(e) {
         console.log(e);
-        res.sendStatus(404);
+        res.sendStatus(500);
     }
  });
-// Get farmers by city.
-router.get('/:city', async   (req, res, next)=>{
-    res.status(200).json({farmer: req.farmer});
- }); */
 
 // Update farmer
  router.put('/:farmerid', reqRateLimiter, async (req, res, next)=>{
@@ -119,7 +104,4 @@ router.get('/:city', async   (req, res, next)=>{
   }
 })
 app.use('/api/farmers', router); 
-
-
-
 }

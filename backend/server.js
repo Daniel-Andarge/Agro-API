@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(reqRateLimiter);
 
-app.use(session({
+/* app.use(session({
   genid: function (req) {
 	return uuidv4();
   },
@@ -23,7 +23,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: { maxAge: 60 * 60 * 1000 } 
-}));
+})); */
 
 
 const db = require("./models")
@@ -35,9 +35,9 @@ db.sequelize.sync()
     console.log("Failed to sync db: " + err.message);
   });
 
-app.get("/", (req, res) => {
+ app.get("/", (req, res) => {
   res.json({ message: "Welcome to AgroAPI service." });
-});
+}); 
 
 require("./routes/farmer.routes")(app);
 

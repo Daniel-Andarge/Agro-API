@@ -1,6 +1,6 @@
 
 module.exports = (sequelize, Sequelize) => {
-const  Farmer = sequelize.define('farmer', 
+const Processor = sequelize.define('processor', 
   {
   id: {
       type: Sequelize.INTEGER,
@@ -14,7 +14,7 @@ const  Farmer = sequelize.define('farmer',
         notNull: {
           msg: 'Please enter your name'
         },
-  },
+  }
 },
   lastname: {
       type: Sequelize.STRING,
@@ -93,5 +93,5 @@ const  Farmer = sequelize.define('farmer',
   },
   });
 
-return Farmer;
+return Processor;
 };

@@ -30,8 +30,8 @@ router.post('/',  reqRateLimiter, async (req, res, next)=>{
       }
    });
 
-// Retrieve all Farmers
-router.get('/',  reqRateLimiter, cache, async (req, res, next)=>{
+// Get all Farmers
+router.get('/',cache(100), async (req, res, next)=>{
        
       try {
           const farmers = await getAllFarmers();
@@ -54,22 +54,24 @@ router.param('id', async (req, res, next, id)=> {
  });
   
  // Get farmer by id
- router.get('/:id', reqRateLimiter, cache,  (req, res, next)=>{
+ router.get('/:id', async   (req, res, next)=>{
     res.status(200).json({farmer: req.farmer});
  });
 
- router.get('/:price',  reqRateLimiter, cache, async (req, res, next)=>{
+// Get farmers by city.
+ router.get('/:city',  reqRateLimiter,cache(100), async (req, res, next)=>{
        
     try {
-        const farmers = await getAllFarmers();
+        const farmers = await getByCity();
         res.status(200).json({farmers: farmers});
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
     }
  });
+
 // Update farmer
-   router.put('/:farmerid', reqRateLimiter, async (req, res, next)=>{
+ router.put('/:farmerid', reqRateLimiter, async (req, res, next)=>{
     try{
       const firstname = req.body.farmer.firstname;
       const lastname = req.body.farmer.lastname;
@@ -101,5 +103,5 @@ router.param('id', async (req, res, next, id)=> {
       console.log(e);
   }
 })
-app.use('/api/v1/farmers', router); 
+app.use('/api/farmers', router); 
 }

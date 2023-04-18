@@ -8,7 +8,6 @@ module.exports ={
   priceByProduct,
   deletePrice
 };
-
 async function insertPrice(product, city, price) {
   await Price.create({product, city, price});
  

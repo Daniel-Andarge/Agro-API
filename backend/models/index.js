@@ -11,10 +11,10 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.pool.idle
   }
 });
-
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.farmers = require("./farmer.model.js")(sequelize, Sequelize);
-db.prices = require("./price.model.js")(sequelize, Sequelize);
+//db.prices = require("./price.model.js")(sequelize, Sequelize);
+//db.processors = require("./processor.model.js")(sequelize, Sequelize);
 module.exports = db;

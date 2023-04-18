@@ -1,5 +1,5 @@
 const NodeCache = require('node-cache');
-const cache = new NodeCache({stdTTL: 200, maxKeys: 10, useClones: false})
+const cache = new NodeCache();
 
 module.exports = duration => (req, res, next) => {
   if(req.method !== 'GET') {
