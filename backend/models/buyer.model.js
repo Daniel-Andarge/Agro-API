@@ -1,22 +1,21 @@
-
 module.exports = (sequelize, Sequelize) => {
-const Price = sequelize.define('price', 
+const Buyer = sequelize.define('buyer', 
   {
   id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
   },
-  product: {
+  name: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
         notNull: {
           msg: 'Please enter the product name'
         },
-        isAlpha: {
+         isAlpha: {
           msg: "Invalid name, Please use letters only"
-        } 
+        }  
     },
   },
   city: {
@@ -26,21 +25,21 @@ const Price = sequelize.define('price',
       notNull: {
         msg: 'Please enter city'
       },
-      isAlpha: {
+       /* isAlpha: {
         msg: "Invalid input, Please use letters only"
-      }
+      }  */
     },
   },
-  price: {
+  phone: {
       type: Sequelize.INTEGER,
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Please enter price'
+          msg: 'Please enter phone'
         },
-        isNumeric: {
+         isNumeric: {
           msg: "Invalid price, Please enter number only"
-        } 
+        }  
     },
   },
   createdAt: {
@@ -55,5 +54,5 @@ const Price = sequelize.define('price',
   },
   });
 
-return Price;
+return Buyer;
 };

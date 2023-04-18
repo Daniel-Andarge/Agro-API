@@ -1,44 +1,46 @@
 const db = require('../models/index');
-const Price = db.prices;
-module.exports ={
-  insertPrice,
-  getAllPrice,
-  updatePrice,
-  priceByCity,
-  priceByProduct,
-  deletePrice
+const Buyer = db.buyers;
+module.exports = {
+  insertBuyer,
+  getAllBuyers,
+  updateBuyer,
+  getOneBuyer,
+  buyerByCity,
+  deleteBuyer
 };
 
-async function insertPrice(product, city, price) {
-  await Price.create({product, city, price});
+async function insertBuyer(name, city, phone) {
+  await Buyer.create({name, city, phone});
  
 }
-async function getAllPrice() {
-  const prices = await Farmer.findAll();
-        return prices;
+async function getAllBuyers() {
+  const buyers = await Buyer.findAll();
+        return buyers;
 }
-async function priceByCity(city) {
-  const price = await Price.findByPk(id);   
-       return Price;      
+async function getOneBuyer(id) {
+      
+  const buyer = await Buyer.findByPk(id);
+    
+  return buyer;
+
+  }
+
+async function buyerByCity(city) {
+  const buyer = await Buyer.findByPk(id);   
+       return Buyer;      
 }
-async function priceById(id) { 
-  const price = await Price.findByPk(id);
-      return price;
-          
+async function buyerById(id) { 
+  const buyer = await Buyer.findByPk(id);
+      return buyer;        
 }
-async function priceByProduct(product) {
-    const price = await Price.findByPk(id);
-      return price;
-        
-}
-async function updatePrice(product, city, price, id){
-    await Farmer.update({product, city, price}, 
+
+async function updateBuyer(name, city, phone, id){
+    await Buyer.update({name, city, phone}, 
       { where: {id: id}});  
 }
- 
-async function  deletePrice(id) {
-  const price = await priceById(id);
-   await price.destroy();
+async function  deleteBuyer(id) {
+  const buyer = await buyerById(id);
+   await buyer.destroy();
 }
 
 

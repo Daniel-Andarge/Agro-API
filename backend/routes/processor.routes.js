@@ -1,41 +1,41 @@
 const cache = require('../middlewares/routeCache');
 const { reqRateLimiter } = require('../middlewares/reqRateLimiter')
 const router = require('express').Router();
-const {getAllFarmers,
-       insertFarmer, 
-       getOneFarmer, 
-       updateFarmer,
-       deleteFarmer} = require('../controllers/farmer.controller')
+const {
+    insertProcessor,
+    getAllProcessors,
+    updateProcessor,
+    getOneProcessor,
+    deleteProcessor
+  } = require('../controllers/processor.controller')
 
 module.exports = app => {
-// Add farmer
+// Add Product
 router.post('/',  reqRateLimiter, async (req, res, next)=>{
       try{
-          const firstname = req.body.farmer.firstname;
-          const lastname = req.body.farmer.lastname;
-          const farmtype = req.body.farmer.farmtype;
-          const product = req.body.farmer.product;
-          const city = req.body.farmer.city;
-          const address = req.body.farmer.address;
-          console.log(firstname);
-                if (!firstname || !lastname || !farmtype || !product || !city || !address) {
+          const companyname = req.body.processor.companyname;
+          const city = req.body.processor.city;
+          const phone = req.body.processor.phone;
+          const product = req.body.processor.product;
+          console.log(companyname);
+                if (!companyname || !city || !phone || !product) {
                   return res.sendStatus(400);
                }
     
-          const farmer =  await insertFarmer(firstname, lastname, farmtype, product, city, address)
-          .then(() => res.json({ message: 'Farmer created.' }));    
+          const farmer =  await  insertProcessor(companyname, city, phone, product)
+          .then(() => res.json({ message: 'Processor created.' }));    
       } catch(e){
           console.log(e);
           res.sendStatus(400);
       }
    });
 
-// Get all Farmers
+// Get all Processors
 router.get('/',cache(100), async (req, res, next)=>{
        
       try {
-          const farmers = await getAllFarmers();
-          res.status(200).json({farmers: farmers});
+          const processors = await getAllProcessors();
+          res.status(200).json({processors: processors});
       } catch(e) {
           console.log(e);
           res.sendStatus(500);
@@ -44,48 +44,34 @@ router.get('/',cache(100), async (req, res, next)=>{
 
 router.param('id', async (req, res, next, id)=> {
     try{
-        const farmer = await getOneFarmer(id);
-        req.farmer = farmer;
-        next(); // go to router.get('/:id')
+        const processor = await getOneProcessor(id);
+        req.processor = processor;
+        next();
     } catch(e) {
         console.log(e);
         res.sendStatus(404);
     }
  });
   
- // Get farmer by id
+ // Get processor by id
  router.get('/:id', async   (req, res, next)=>{
-    res.status(200).json({farmer: req.farmer});
+    res.status(200).json({farmer: req.processor});
  });
 
-// Get farmers by city.
- router.get('/:city',  reqRateLimiter,cache(100), async (req, res, next)=>{
-       
-    try {
-        const farmers = await getByCity();
-        res.status(200).json({farmers: farmers});
-    } catch(e) {
-        console.log(e);
-        res.sendStatus(500);
-    }
- });
-
-// Update farmer
- router.put('/:farmerid', reqRateLimiter, async (req, res, next)=>{
+// Update processor
+ router.put('/:processorid', reqRateLimiter, async (req, res, next)=>{
     try{
-      const firstname = req.body.farmer.firstname;
-      const lastname = req.body.farmer.lastname;
-      const farmtype = req.body.farmer.farmtype;
-      const product = req.body.farmer.product;
-      const city = req.body.farmer.city;
-      const address = req.body.farmer.address;
-      const id = req.body.farmer.id;
-        if (!firstname || !lastname || !farmtype || !product || !city || !address ) {
+        const companyname = req.body.processor.companyname;
+        const city = req.body.processor.city;
+        const phone = req.body.processor.phone;
+        const product = req.body.processor.product;
+        const id = req.body.processor.id;
+        if (!companyname || !city || !phone || !product ) {
             return res.sendStatus(400);
       }
-      const farmer =  await updateFarmer(firstname, lastname, farmtype, product, city, address,id)
-        .then(()=>{return getOneFarmer(id);});
-         res.json({farmer: farmer});
+      const processor =  await updateProcessor(companyname, city, phone, product,id)
+        .then(()=>{return getOneProcessor(id);});
+         res.json({processor: processor});
          
     } catch(e){
         console.log(e);
@@ -93,15 +79,15 @@ router.param('id', async (req, res, next, id)=> {
     }
  });
 
-// Delete farmer
+// Delete processor
  router.delete('/:id', async (req, res, next)=>{
   try{
       const id = req.params.id;
-      const response = await deleteFarmer(id);
+      const response = await deleteProcessor(id);
       return res.sendStatus(204);
   } catch(e){
       console.log(e);
   }
 })
-app.use('/api/farmers', router); 
+app.use('/api/processors', router); 
 }

@@ -1,44 +1,47 @@
 const db = require('../models/index');
-const Price = db.prices;
-module.exports ={
-  insertPrice,
-  getAllPrice,
-  updatePrice,
-  priceByCity,
-  priceByProduct,
-  deletePrice
+const Processor = db.processors;
+module.exports = {
+  insertProcessor,
+  getAllProcessors,
+  updateProcessor,
+  getOneProcessor,
+  deleteProcessor
 };
-async function insertPrice(product, city, price) {
-  await Price.create({product, city, price});
- 
-}
-async function getAllPrice() {
-  const prices = await Farmer.findAll();
-        return prices;
-}
-async function priceByCity(city) {
-  const price = await Price.findByPk(id);   
-       return Price;      
-}
-async function priceById(id) { 
-  const price = await Price.findByPk(id);
-      return price;
-          
-}
-async function priceByProduct(product) {
-    const price = await Price.findByPk(id);
-      return price;
-        
-}
-async function updatePrice(product, city, price, id){
-    await Farmer.update({product, city, price}, 
-      { where: {id: id}});  
-}
- 
-async function  deletePrice(id) {
-  const price = await priceById(id);
-   await price.destroy();
-}
 
+async function insertProcessor(companyname, product, city, phone) {
+ 
+  await Processor.create({companyname, product, city, phone});
+ 
+}
+ async function getAllProcessors() {
+      
+  const processors = await Processor.findAll(/* {
+    where: {city: "Addis Ababa"}
+  } */);
+        return processors;
+        } 
+
+async function getOneProcessor(id) {
+      
+          const processor = await Processor.findByPk(id);
+            
+          return processor;
+        
+          }
+
+  async function updateProcessor (companyname, product, city, phone, id){
+   
+    await Processor.update({companyname, product, city, phone}, { where: {id: id}});
+   
+ }
+ 
+ async function deleteProcessor(id) {
+ 
+  const processor = await getOneProcessor(id);
+    
+   await processor.destroy();
+ 
+ 
+  }
 
 

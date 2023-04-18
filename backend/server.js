@@ -13,17 +13,6 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//app.use(reqRateLimiter);
-
-/* app.use(session({
-  genid: function (req) {
-	return uuidv4();
-  },
-  secret: 'r8q,+&1LM3)CD*zAGpx1xm{NeQhc;#',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 60 * 60 * 1000 } 
-})); */
 
 
 const db = require("./models")
@@ -40,6 +29,8 @@ db.sequelize.sync()
 }); 
 
 require("./routes/farmer.routes")(app);
+require("./routes/buyer.routes")(app);
+require("./routes/processor.routes")(app)
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
