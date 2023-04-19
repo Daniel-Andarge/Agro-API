@@ -1,22 +1,21 @@
 const db = require('../models/index');
 const Price = db.prices;
 module.exports ={
-  insertPrice,
-  getAllPrice,
-  updatePrice,
-  priceByCity,
-  priceByProduct,
-  deletePrice
+  insertVeterinary,
+  getAllVeterinaries,
+  updateVeterinary,
+  VeterinaryByCity,
+  deleteVeterinary
 };
-async function insertPrice(product, city, price) {
+async function  insertVeterinary(product, city, price) {
   await Price.create({product, city, price});
  
 }
-async function getAllPrice() {
+async function getAllVeterinaries() {
   const prices = await Farmer.findAll();
         return prices;
 }
-async function priceByCity(city) {
+async function VeterinaryByCity(city) {
   const price = await Price.findByPk(id);   
        return Price;      
 }
@@ -30,12 +29,12 @@ async function priceByProduct(product) {
       return price;
         
 }
-async function updatePrice(product, city, price, id){
+async function updateVeterinary(product, city, price, id){
     await Farmer.update({product, city, price}, 
       { where: {id: id}});  
 }
  
-async function  deletePrice(id) {
+async function  deleteVeterinary(id) {
   const price = await priceById(id);
    await price.destroy();
 }
