@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
+import {BrowserRouter as Router,Route, Switch} from "react-router-dom";
 import './App.css';
 
 import Home from './components/Home';
@@ -18,7 +18,7 @@ function App() {
         {/* Add Menu Component */}
         <Navbarmenu />
         
-        <Routes> 
+        <Switch> 
           <Route exact path="/" component={Home}/>
           <Route path="/About" component={About}/>
           <Route path="/Online" component={Online}/>
@@ -26,7 +26,7 @@ function App() {
           <Route path="/Contact" component={Contact}/>
 
           
-        </Routes>
+        </Switch>
       </Router>
 
     </div>
