@@ -1,3 +1,4 @@
+
 const cache = require('../middlewares/routeCache');
 const { reqRateLimiter } = require('../middlewares/reqRateLimiter')
 const router = require('express').Router();
@@ -33,18 +34,10 @@ router.post('/',  reqRateLimiter, async (req, res, next)=>{
       }
    });
 
-// Get all Farmers
-router.get('/',cache(100), async (req, res, next)=>{
-       
-      try {
-
-          const farmers = await getAllFarmers();
-          res.status(200).json({farmers: farmers});
-      } catch(e) {
-          console.log(e);
-          res.sendStatus(500);
-      }
-   });
+ // Get all Farmers OR by Pagination
+router.get('/',cache(100), getAllFarmers, async (req, res, next)=>{
+   
+}); 
 
  // Get all Farmers
 router.get('/search',cache(100), async (req, res, next)=>{
@@ -59,7 +52,7 @@ router.get('/search',cache(100), async (req, res, next)=>{
     }
  });  
 
-router.param('id', async (req, res, next, id)=> {
+ router.param('id', async (req, res, next, id)=> {
     try{
         const farmer = await getOneFarmer(id);
         req.farmer = farmer;

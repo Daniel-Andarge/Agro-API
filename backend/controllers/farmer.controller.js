@@ -1,14 +1,32 @@
 const db = require('../models/index');
 const { Op } = require("sequelize");
+/* const getPagination = require('../middlewares/Pagination/getPagination');
+const getPagingData = require('../middlewares/Pagination/getPagingData'); */
 const Farmer = db.farmers;
-module.exports ={
-  insertFarmer,
-  getAllFarmers,
-  updateFarmer,
-  getOneFarmer,
-  getFarmersByCity,
-  deleteFarmer
+
+// Pagination 
+const getPagination = (page, size) => {
+  const limit = size ? +size : 3;
+  const offset = page ? page * limit : 0;
+
+  return { limit, offset };
 };
+
+const getPagingData = (data, page, limit) => {
+  const { count: totalItems, rows: farmers } = data;
+  const currentPage = page ? +page : 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return { totalItems, farmers, totalPages, currentPage };
+};
+
+
+/*  const insertFarmer = async (req, res) => {
+  const {firstname, lastname, farmtype, product, city, address} = req.body;
+  await Farmer.create (
+    {firstname, lastname, farmtype, product, city, address}
+    )
+}  */
   // Add Farmer
 async function insertFarmer(firstname, lastname, farmtype, product, city, address) {
   await Farmer.create (
@@ -17,17 +35,33 @@ async function insertFarmer(firstname, lastname, farmtype, product, city, addres
 }
 
  // Get All Farmers 
-async function getAllFarmers() {  
-  const farmers = await Farmer.findAll();
-      return farmers;
-} 
+ const getAllFarmers = async (req, res) => {  
+  const { page, size, city } = req.query;
+    var condition = city ? { city: { [Op.iLike]: `${city}%` } } : null;
+  
+    const { limit, offset } = getPagination(page, size);
+  
+   await Farmer.findAndCountAll({ where: condition, limit, offset })
+  // return data;
+       .then(data => {
+        const response = getPagingData(data, page, limit);
+        res.send(response);
+      }) 
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving farmers."
+        });
+      }); 
+}; 
 
 // Search Farmers by City
 async function getFarmersByCity(city) {
   const farmers = await Farmer.findAll({
+    limit: 2,
     where: {
       city: {
-        [Op.iLike]: city,
+        [Op.iLike]: `${city}%` 
       }}
   });
   return farmers;
@@ -54,3 +88,15 @@ async function deleteFarmer(id) {
 }
 
 
+/* module.exports ={
+
+  getAllFarmers
+} */
+module.exports ={
+  insertFarmer,
+  getAllFarmers,
+  updateFarmer,
+  getOneFarmer,
+  getFarmersByCity,
+  deleteFarmer
+};
