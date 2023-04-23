@@ -1,28 +1,19 @@
-const cache = require('../middlewares/routeCache');
-const { reqRateLimiter } = require('../middlewares/reqRateLimiter')
 const router = require('express').Router();
-const {
-    insertProcessor,
-    getAllProcessors,
-    updateProcessor,
-    getOneProcessor,
-    deleteProcessor
-  } = require('../controllers/processor.controller')
+const { authJwt } = require("../middlewares");
+const cache = require('../middlewares/routeCache');
+const controller = require("../controllers/processor.controller");
+const { reqRateLimiter } = require('../middlewares/reqRateLimiter');
 
 module.exports = app => {
 // Add Product
 router.post('/',  reqRateLimiter, async (req, res, next)=>{
       try{
-          const companyname = req.body.processor.companyname;
-          const city = req.body.processor.city;
-          const phone = req.body.processor.phone;
-          const product = req.body.processor.product;
+          const { companyname, city, phone, product } = req.body.processor;
           console.log(companyname);
                 if (!companyname || !city || !phone || !product) {
                   return res.sendStatus(400);
                }
-    
-          const farmer =  await  insertProcessor(companyname, city, phone, product)
+          const farmer =  await  controller.insertProcessor(companyname, city, phone, product)
           .then(() => res.json({ message: 'Processor created.' }));    
       } catch(e){
           console.log(e);
@@ -34,7 +25,7 @@ router.post('/',  reqRateLimiter, async (req, res, next)=>{
 router.get('/',cache(100), async (req, res, next)=>{
        
       try {
-          const processors = await getAllProcessors();
+          const processors = await controller.getAllProcessors();
           res.status(200).json({processors: processors});
       } catch(e) {
           console.log(e);
@@ -44,7 +35,7 @@ router.get('/',cache(100), async (req, res, next)=>{
 
 router.param('id', async (req, res, next, id)=> {
     try{
-        const processor = await getOneProcessor(id);
+        const processor = await controller.getOneProcessor(id);
         req.processor = processor;
         next();
     } catch(e) {
@@ -59,17 +50,13 @@ router.param('id', async (req, res, next, id)=> {
  });
 
 // Update processor
- router.put('/:processorid', reqRateLimiter, async (req, res, next)=>{
+ router.put('/:processorid', reqRateLimiter, [authJwt.verifyToken, authJwt.isModerator], async (req, res, next)=>{
     try{
-        const companyname = req.body.processor.companyname;
-        const city = req.body.processor.city;
-        const phone = req.body.processor.phone;
-        const product = req.body.processor.product;
-        const id = req.body.processor.id;
+        const { companyname, city, phone, product, id } = req.body.processor;
         if (!companyname || !city || !phone || !product ) {
             return res.sendStatus(400);
       }
-      const processor =  await updateProcessor(companyname, city, phone, product,id)
+      const processor =  await controller.updateProcessor(companyname, city, phone, product,id)
         .then(()=>{return getOneProcessor(id);});
          res.json({processor: processor});
          
@@ -80,10 +67,10 @@ router.param('id', async (req, res, next, id)=> {
  });
 
 // Delete processor
- router.delete('/:id', async (req, res, next)=>{
+ router.delete('/:id', [authJwt.verifyToken, authJwt.isAdmin], async (req, res, next)=>{
   try{
       const id = req.params.id;
-      const response = await deleteProcessor(id);
+      const response = await controller.deleteProcessor(id);
       return res.sendStatus(204);
   } catch(e){
       console.log(e);

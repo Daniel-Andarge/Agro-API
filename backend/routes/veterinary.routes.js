@@ -1,41 +1,32 @@
-const cache = require('../middlewares/routeCache');
-const { reqRateLimiter } = require('../middlewares/reqRateLimiter')
 const router = require('express').Router();
-const {getAllFarmers,
-       insertFarmer, 
-       getOneFarmer, 
-       updateFarmer,
-       deleteFarmer} = require('../controllers/farmer.controller')
+const { authJwt } = require("../middlewares");
+const cache = require('../middlewares/routeCache');
+const controller = require('../controllers/veterinary.controller');
+const { reqRateLimiter } = require('../middlewares/reqRateLimiter');
 
 module.exports = app => {
-// Add farmer
+// Add veterinary
 router.post('/',  reqRateLimiter, async (req, res, next)=>{
       try{
-          const firstname = req.body.farmer.firstname;
-          const lastname = req.body.farmer.lastname;
-          const farmtype = req.body.farmer.farmtype;
-          const product = req.body.farmer.product;
-          const city = req.body.farmer.city;
-          const address = req.body.farmer.address;
+          const { } = req.body.veterinary;
           console.log(firstname);
                 if (!firstname || !lastname || !farmtype || !product || !city || !address) {
                   return res.sendStatus(400);
                }
-    
-          const farmer =  await insertFarmer(firstname, lastname, farmtype, product, city, address)
-          .then(() => res.json({ message: 'Farmer created.' }));    
+          const veterinary =  await controller.insertVeterinary(firstname, lastname, farmtype, product, city, address)
+          .then(() => res.json({ message: 'Veterinary created.' }));    
       } catch(e){
           console.log(e);
           res.sendStatus(400);
       }
    });
 
-// Get all Farmers
+// Get all Veterinaries
 router.get('/',cache(100), async (req, res, next)=>{
        
       try {
-          const farmers = await getAllFarmers();
-          res.status(200).json({farmers: farmers});
+          const veterinaries = await controller.getAllVeterinaries();
+          res.status(200).json({veterinaries: veterinaries});
       } catch(e) {
           console.log(e);
           res.sendStatus(500);
@@ -44,8 +35,8 @@ router.get('/',cache(100), async (req, res, next)=>{
 
 router.param('id', async (req, res, next, id)=> {
     try{
-        const farmer = await getOneFarmer(id);
-        req.farmer = farmer;
+        const veterinary = await controller.getOneVeterinary(id);
+        req.veterinary = veterinary;
         next(); // go to router.get('/:id')
     } catch(e) {
         console.log(e);
@@ -53,39 +44,33 @@ router.param('id', async (req, res, next, id)=> {
     }
  });
   
- // Get farmer by id
+ // Get veterinary by id
  router.get('/:id', async   (req, res, next)=>{
-    res.status(200).json({farmer: req.farmer});
+    res.status(200).json({veterinary: req.veterinary});
  });
 
-// Get farmers by city.
+// Get veterinaries by city.
  router.get('/:city',  reqRateLimiter,cache(100), async (req, res, next)=>{
        
     try {
-        const farmers = await getByCity();
-        res.status(200).json({farmers: farmers});
+        const veterinaries = await controller.getVeterinariesByCity();
+        res.status(200).json({veterinaries: veterinaries});
     } catch(e) {
         console.log(e);
         res.sendStatus(500);
     }
  });
 
-// Update farmer
- router.put('/:farmerid', reqRateLimiter, async (req, res, next)=>{
+// Update veterinary
+ router.put('/:veterinaryid', reqRateLimiter, [authJwt.verifyToken, authJwt.isModerator], async (req, res, next)=>{
     try{
-      const firstname = req.body.farmer.firstname;
-      const lastname = req.body.farmer.lastname;
-      const farmtype = req.body.farmer.farmtype;
-      const product = req.body.farmer.product;
-      const city = req.body.farmer.city;
-      const address = req.body.farmer.address;
-      const id = req.body.farmer.id;
+      const { } = req.body.veterinary;
         if (!firstname || !lastname || !farmtype || !product || !city || !address ) {
             return res.sendStatus(400);
       }
-      const farmer =  await updateFarmer(firstname, lastname, farmtype, product, city, address,id)
-        .then(()=>{return getOneFarmer(id);});
-         res.json({farmer: farmer});
+      const veterinary =  await updateVeterinary(firstname, lastname, farmtype, product, city, address,id)
+        .then(()=>{return getOneVeterinary(id);});
+         res.json({veterinary: veterinary});
          
     } catch(e){
         console.log(e);
@@ -93,15 +78,15 @@ router.param('id', async (req, res, next, id)=> {
     }
  });
 
-// Delete farmer
- router.delete('/:id', async (req, res, next)=>{
+// Delete veterinary
+ router.delete('/:id', [authJwt.verifyToken, authJwt.isAdmin], async (req, res, next)=>{
   try{
       const id = req.params.id;
-      const response = await deleteFarmer(id);
+      const response = await deleteVeterinary(id);
       return res.sendStatus(204);
   } catch(e){
       console.log(e);
   }
 })
-app.use('/api/farmers', router); 
+app.use('/api/veterinaries', router); 
 }

@@ -1,30 +1,21 @@
-const cache = require('../middlewares/routeCache');
-const { reqRateLimiter } = require('../middlewares/reqRateLimiter')
 const router = require('express').Router();
-const {
-    insertBuyer,
-    getAllBuyers,
-    getOneBuyer,
-    updateBuyer,
-    buyerByCity,
-    deleteBuyer
-  } = require('../controllers/buyer.controller')
+const { authJwt } = require("../middlewares");
+const cache = require('../middlewares/routeCache');
+const controller = require('../controllers/buyer.controller');
+const { reqRateLimiter } = require('../middlewares/reqRateLimiter');
 
 module.exports = app => {
 // Add buyer
 router.post('/', async (req, res, next)=>{
       try{
-          const name = req.body.buyer.name;
-          const city = req.body.buyer.city;
-          const phone = req.body.buyer.phone;
+          const { name, city, phone } = req.body.buyer;
           console.log(name);
                 if (!name || !city || !phone) {
                   return res.sendStatus(400);
                }
-    
-          const buyer =  await insertBuyer (name, city, phone)
-          .then(() => res.json({ message: 'Buyer created.' }));    
-      } catch(e){
+          const buyer =  await controller.insertBuyer (name, city, phone)
+          .then(() => res.json({ message: 'Buyer created.' }));
+        } catch(e){
           console.log(e);
           res.sendStatus(400);
       }
@@ -33,7 +24,7 @@ router.post('/', async (req, res, next)=>{
 // Get all Buyers
 router.get('/',cache(100), async (req, res, next)=>{
       try {
-          const buyers = await getAllBuyers();
+          const buyers = await controller.getAllBuyers();
           res.status(200).json({buyers: buyers});
       } catch(e) {
           console.log(e);
@@ -43,7 +34,7 @@ router.get('/',cache(100), async (req, res, next)=>{
 
 router.param('id', async (req, res, next, id)=> {
     try{
-        const buyer = await getOneBuyer(id);
+        const buyer = await controller.getOneBuyer(id);
         req.buyer = buyer;
         next(); 
     } catch(e) {
@@ -59,18 +50,15 @@ router.param('id', async (req, res, next, id)=> {
 
 
 // Update buyer
- router.put('/:buyerid', reqRateLimiter, async (req, res, next)=>{
+ router.put('/:buyerid', reqRateLimiter, [authJwt.verifyToken, authJwt.isModerator], async (req, res, next) => {
     try{
-        const name = req.body.buyer.name;
-        const city = req.body.buyer.city;
-        const phone = req.body.buyer.phone;
-        const id = req.body.buyer.id;
+        const { name, city, phone, id } = req.body.buyer;
         if (!name || !city || !phone) {
             return res.sendStatus(400);
          }
 
-      const buyer =  await updateBuyer (name, city, phone,id)
-        .then(()=>{return getOneBuyer(id);});
+      const buyer =  await controller.updateBuyer (name, city, phone,id)
+        .then(()=>{return controller.getOneBuyer(id);});
          res.json({buyer: buyer});
          
     } catch(e){
@@ -80,10 +68,10 @@ router.param('id', async (req, res, next, id)=> {
  });
 
 // Delete buyer
- router.delete('/:id', async (req, res, next)=>{
+ router.delete('/:id', [authJwt.verifyToken, authJwt.isAdmin], async (req, res, next)=>{
   try{
       const id = req.params.id;
-      const response = await deleteBuyer(id);
+      const response = await controller.deleteBuyer(id);
       return res.sendStatus(204);
   } catch(e){
       console.log(e);

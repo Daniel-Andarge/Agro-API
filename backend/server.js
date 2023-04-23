@@ -1,9 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const session = require('express-session');  // express-sessions
 const { v4: uuidv4 } = require('uuid'); //To call: uuidv4();
-//const { reqRateLimiter } = require('./middlewares/rateLimiter/reqRateLimiter')
 
 var corsOptions = {
   origin: "http://localhost:8081"
@@ -13,9 +11,16 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(function(req, res, next) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Origin, Content-Type, Accept"
+  );
+  next();
+});
 
 const db = require("./models")
+
 db.sequelize.sync()
   .then(() => {
     console.log("Synced db.");
@@ -30,9 +35,13 @@ db.sequelize.sync()
 
 require("./routes/farmer.routes")(app);
 require("./routes/buyer.routes")(app);
-require("./routes/processor.routes")(app)
+require("./routes/processor.routes")(app);
+require("./routes/equipmentDealer.routes")(app)
+require("./routes/user.routes")(app);
+require("./routes/auth.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+

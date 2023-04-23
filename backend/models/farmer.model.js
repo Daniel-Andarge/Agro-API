@@ -32,7 +32,7 @@ const  Farmer = sequelize.define('farmer',
       },
       validate: {
         notNull: {
-          msg: 'Please enter your Phone number'
+          msg: 'Please enter  Phone number'
         },
         isNumeric: {
           msg: "Invalid phone, Please use numbers only"
@@ -42,13 +42,13 @@ const  Farmer = sequelize.define('farmer',
           msg: "Phone must be  10 characters in length"
       }
     },
-  }, */
+  },  */
   farmtype: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Please enter the farm type'
+        msg: 'Please enter farm type'
       },
 
     },
@@ -58,19 +58,29 @@ const  Farmer = sequelize.define('farmer',
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Please enter your product'
+        msg: 'Please enter  product'
       },
 /*       isAlpha: {
         msg: "Invalid input, Please use letters only"
       } */
     },
   },
+/*   state: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'Please enter state'
+      },
+    },
+  }, */
+
   city: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Please enter your city'
+        msg: 'Please enter city'
       },
 /*       isAlpha: {
         msg: "Invalid input, Please use letters only"
