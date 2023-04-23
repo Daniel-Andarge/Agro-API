@@ -6,7 +6,7 @@ const { reqRateLimiter } = require('../middlewares/reqRateLimiter');
 
 module.exports = app => {
 // Add farmer
-router.post('/',  reqRateLimiter, async (req, res, next)=>{
+router.post('/',  reqRateLimiter,[authJwt.verifyToken, authJwt.isModerator], async (req, res, next)=>{
       try{
       const  { firstname,lastname,farmtype,product,city,address } =  req.body.farmer;
           console.log(firstname);
@@ -22,7 +22,7 @@ router.post('/',  reqRateLimiter, async (req, res, next)=>{
    });
 
  // Get all Farmers OR by Pagination
-router.get('/',cache(100), /*[authJwt.verifyToken, authJwt.isModerator],*/ controller.getAllFarmers); 
+router.get('/',cache(100),  controller.getAllFarmers); 
 
  // Get all Farmers
 router.get('/search',cache(100), async (req, res, next)=>{

@@ -6,7 +6,7 @@ const controller = require("../controllers/equipmentDealer.controller")
 
 module.exports = app => {
 // Add equipmentDealer
-router.post('/',  reqRateLimiter, async (req, res, next)=>{
+router.post('/',  reqRateLimiter, [authJwt.verifyToken, authJwt.isModerator], async (req, res, next)=>{
       try{
         const { companyname, state, phone, category, product, city, address } = req.body.equipmentDealer;
           console.log(companyname);

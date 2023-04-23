@@ -6,7 +6,7 @@ const { reqRateLimiter } = require('../middlewares/reqRateLimiter');
 
 module.exports = app => {
 // Add buyer
-router.post('/', async (req, res, next)=>{
+router.post('/', [authJwt.verifyToken, authJwt.isModerator], async (req, res, next)=>{
       try{
           const { name, city, phone } = req.body.buyer;
           console.log(name);

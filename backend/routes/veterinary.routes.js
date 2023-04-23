@@ -6,7 +6,7 @@ const { reqRateLimiter } = require('../middlewares/reqRateLimiter');
 
 module.exports = app => {
 // Add veterinary
-router.post('/',  reqRateLimiter, async (req, res, next)=>{
+router.post('/',  reqRateLimiter, [authJwt.verifyToken, authJwt.isModerator], async (req, res, next)=>{
       try{
           const { } = req.body.veterinary;
           console.log(firstname);
