@@ -34,8 +34,10 @@ export default class Home extends Component {
       <div className="container">
         <header className="jumbotron">
           <h3>{this.state.content}</h3>
+          <h1>Welcome To AgroAPI </h1>
         </header>
       </div>
+      
     );
   }
 }
