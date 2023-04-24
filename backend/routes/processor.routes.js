@@ -76,5 +76,5 @@ router.param('id', async (req, res, next, id)=> {
       console.log(e);
   }
 })
-app.use('/api/processors', router); 
+app.use('/api/v1/processors', router); 
 }

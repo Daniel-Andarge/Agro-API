@@ -22,7 +22,7 @@ router.post('/',  reqRateLimiter,[authJwt.verifyToken, authJwt.isModerator], asy
    });
 
  // Get all Farmers OR by Pagination
-router.get('/',cache(100),  controller.getAllFarmers); 
+router.get('/',cache(100),  [authJwt.verifyToken, authJwt.isModerator], controller.getAllFarmers); 
 
  // Get all Farmers
 router.get('/search',cache(100), async (req, res, next)=>{
@@ -81,5 +81,5 @@ router.get('/search',cache(100), async (req, res, next)=>{
       console.log(e);
   }
 })
-app.use('/api/farmers', router); 
+app.use('/api/v1/farmers', router); 
 }

@@ -88,5 +88,5 @@ router.param('id', async (req, res, next, id)=> {
       console.log(e);
   }
 })
-app.use('/api/veterinaries', router); 
+app.use('/api/v1/veterinaries', router); 
 }

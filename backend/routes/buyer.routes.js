@@ -48,7 +48,6 @@ router.param('id', async (req, res, next, id)=> {
     res.status(200).json({buyer: req.buyer});
  });
 
-
 // Update buyer
  router.put('/:buyerid', reqRateLimiter, [authJwt.verifyToken, authJwt.isModerator], async (req, res, next) => {
     try{
@@ -56,7 +55,6 @@ router.param('id', async (req, res, next, id)=> {
         if (!name || !city || !phone) {
             return res.sendStatus(400);
          }
-
       const buyer =  await controller.updateBuyer (name, city, phone,id)
         .then(()=>{return controller.getOneBuyer(id);});
          res.json({buyer: buyer});
@@ -77,5 +75,5 @@ router.param('id', async (req, res, next, id)=> {
       console.log(e);
   }
 })
-app.use('/api/buyers', router); 
+app.use('/api/v1/buyers', router); 
 }

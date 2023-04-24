@@ -80,5 +80,5 @@ router.get('/search',cache(100), async (req, res, next)=>{
       console.log(e);
   }
 })
-app.use('/api/equipmentDealers', router); 
+app.use('/api/v1/equipmentDealers', router); 
 }
