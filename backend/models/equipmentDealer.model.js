@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const  EquipmentDealer = sequelize.define('equipmentDealer',
+    const  EquipmentDealer = sequelize.define('equipdealer',
     {
     id: {
         type: Sequelize.INTEGER,
@@ -69,6 +69,7 @@ module.exports = (sequelize, Sequelize) => {
           },
         },
     },
+    
     createdAt: {
           type: Sequelize.DATE,
           defaultValue: sequelize.literal('NOW()'),

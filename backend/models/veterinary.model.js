@@ -16,7 +16,7 @@ const Veterinary = sequelize.define('veterinary',
         },
   },
 },
-  lastname: {
+lastname: {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
@@ -25,7 +25,7 @@ const Veterinary = sequelize.define('veterinary',
         },
     },
   },
- /*  phone: {
+ phone: {
       type: Sequelize.INTEGER,
       allowNull: false,
       unique: {
@@ -35,37 +35,12 @@ const Veterinary = sequelize.define('veterinary',
         notNull: {
           msg: 'Please enter your Phone number'
         },
-        isNumeric: {
-          msg: "Invalid phone, Please use numbers only"
-        },
         len: {
           args: 10,
           msg: "Phone must be  10 characters in length"
       }
     },
-  }, */
-  farmtype: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notNull: {
-        msg: 'Please enter the farm type'
-      },
-
-    },
-  },
-  product: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notNull: {
-        msg: 'Please enter your product'
-      },
-/*       isAlpha: {
-        msg: "Invalid input, Please use letters only"
-      } */
-    },
-  },
+  }, 
   city: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -73,9 +48,6 @@ const Veterinary = sequelize.define('veterinary',
       notNull: {
         msg: 'Please enter your city'
       },
-/*       isAlpha: {
-        msg: "Invalid input, Please use letters only"
-      } */
     },
   },
   address: {

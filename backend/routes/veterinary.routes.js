@@ -51,7 +51,6 @@ router.param('id', async (req, res, next, id)=> {
 
 // Get veterinaries by city.
  router.get('/:city',  reqRateLimiter,cache(100), async (req, res, next)=>{
-       
     try {
         const veterinaries = await controller.getVeterinariesByCity();
         res.status(200).json({veterinaries: veterinaries});

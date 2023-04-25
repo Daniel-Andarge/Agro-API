@@ -22,7 +22,7 @@ router.post('/',  reqRateLimiter, [authJwt.verifyToken, authJwt.isModerator], as
    });
 
  // Get all EquipmentDealers OR by Pagination
-router.get('/',cache(100),/* [authJwt.verifyToken, authJwt.isModerator], */ controller.getAllEquipmentDealers); 
+router.get('/',cache(100), [authJwt.verifyToken],  controller.getAllEquipmentDealers); 
 
  // Get all EquipmentDealers
 router.get('/search',cache(100), async (req, res, next)=>{     
@@ -49,7 +49,7 @@ router.get('/search',cache(100), async (req, res, next)=>{
  });
   
  // Get equipmentDealer by id
- router.get('/:id', async   (req, res, next)=>{
+ router.get('/:id', [authJwt.verifyToken], async   (req, res, next)=>{
     res.status(200).json({equipmentDealer: req.equipmentDealer});
  });
 

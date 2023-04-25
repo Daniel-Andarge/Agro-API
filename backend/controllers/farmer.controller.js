@@ -1,12 +1,10 @@
 const db = require('../models/index');
 const { Op } = require("sequelize");
-/* const getPagination = require('../middlewares/Pagination/getPagination');
-const getPagingData = require('../middlewares/Pagination/getPagingData'); */
 const Farmer = db.farmers;
 
 // Pagination 
 const getPagination = (page, size) => {
-  const limit = size ? +size : 3;
+  const limit = size ? +size : 5;
   const offset = page ? page * limit : 0;
 
   return { limit, offset };
@@ -20,13 +18,6 @@ const getPagingData = (data, page, limit) => {
   return { totalItems, farmers, totalPages, currentPage };
 };
 
-
-/*  const insertFarmer = async (req, res) => {
-  const {firstname, lastname, farmtype, product, city, address} = req.body;
-  await Farmer.create (
-    {firstname, lastname, farmtype, product, city, address}
-    )
-}  */
   // Add Farmer
 async function insertFarmer(firstname, lastname, farmtype, product, city, address) {
   await Farmer.create (
@@ -58,7 +49,7 @@ async function insertFarmer(firstname, lastname, farmtype, product, city, addres
 // Search Farmers by City
 async function getFarmersByCity(city) {
   const farmers = await Farmer.findAll({
-    limit: 2,
+  //  limit: 2,
     where: {
       city: {
         [Op.iLike]: `${city}%` 
@@ -87,11 +78,6 @@ async function deleteFarmer(id) {
   await farmer.destroy();
 }
 
-
-/* module.exports ={
-
-  getAllFarmers
-} */
 module.exports ={
   insertFarmer,
   getAllFarmers,

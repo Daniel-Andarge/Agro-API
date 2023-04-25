@@ -22,10 +22,10 @@ router.post('/',  reqRateLimiter,[authJwt.verifyToken, authJwt.isModerator], asy
    });
 
  // Get all Farmers OR by Pagination
-router.get('/',cache(100),  [authJwt.verifyToken, authJwt.isModerator], controller.getAllFarmers); 
+router.get('/',cache(100),[authJwt.verifyToken], controller.getAllFarmers); 
 
- // Get all Farmers
-router.get('/search',cache(100), async (req, res, next)=>{
+ // Get Farmers by city
+router.get('/search',cache(100), [authJwt.verifyToken], async (req, res, next)=>{
        
     try {
         const city = req.query.city;
@@ -37,7 +37,7 @@ router.get('/search',cache(100), async (req, res, next)=>{
     }
  });  
 
- router.param('id', async (req, res, next, id)=> {
+ router.param('id',  async (req, res, next, id)=> {
     try{
         const farmer = await controller.getOneFarmer(id);
         req.farmer = farmer;
@@ -50,7 +50,7 @@ router.get('/search',cache(100), async (req, res, next)=>{
  });
   
  // Get farmer by id
- router.get('/:id', async   (req, res, next)=>{
+ router.get('/:id',[authJwt.verifyToken], async   (req, res, next)=>{
     res.status(200).json({farmer: req.farmer});
  });
 
