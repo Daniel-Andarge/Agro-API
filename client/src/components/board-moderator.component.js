@@ -1,80 +1,39 @@
-import React, { Component, useState, useEffect  } from "react";
-
+import React, { useState, useEffect } from 'react'
 //import "./App.css"
-import "../App.css";
+//import "../assets/App.css"
 import Axios from 'axios'
-import UserService from "../services/user.service";
-import EventBus from "../common/EventBus";
-
-export default class BoardModerator extends Component {
-  constructor(props) {
-    
-    super(props);
-
-    this.state = {
-      content: ""
-    };
-   
-  
-  }
-
-  
-
-  componentDidMount() {
-    UserService.getModeratorBoard().then(
-      response => {
-        this.setState({
-          content: response.data
-        });
-      },
-      error => {
-        this.setState({
-          content:
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString()
-        });
-
-        if (error.response && error.response.status === 401) {
-          EventBus.dispatch("logout");
-        }
-      }
-    );
-  }
-  
+//const bodyParser = require('body-parser')
 
 
-  render() {
-    const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
-    const [pages, setPages] = useState('')
-    const [bookList, setBookList] = useState([])
-    useEffect(() => {
-      Axios.get("http://localhost:3001/books").then((response) => {
-        setBookList(response.data)
-  
-      })
-    }, [])
-  
-    const submitReview = () => {
-      Axios.post("http://localhost:3001/books", {
-        title: title,
-        author: author,
-        pages: pages,
-  
-      }).then(() => {
-        alert("success");
-      });
-  
-    };
-    return (
-      <div className="container">
-        <header className="jumbotron">
-          <h3>{this.state.content}</h3>
-          <div className='App'>
-       <h1>Add New book to Databerase</h1>
+const  BoardModerator = () => {
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [pages, setPages] = useState('')
+  const [bookList, setBookList] = useState([])
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/books").then((response) => {
+      setBookList(response.data)
+
+    })
+  }, [])
+
+  const submitReview = () => {
+    Axios.post("http://localhost:3001/books", {
+      title: title,
+      author: author,
+      pages: pages,
+
+    }).then(() => {
+      alert("success");
+    });
+
+  };
+
+  return (
+
+    <div className='App'>
+       <h1>Add New book to Database</h1>
 
        <div className="form">
           <label>Title</label>
@@ -99,8 +58,15 @@ export default class BoardModerator extends Component {
        </div>
     </div>
      
-        </header>
-      </div>
-    );
-  }
+  /* <div>
+      <Banner
+     head1="Welcome"
+     head2="World"
+     content={"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit fugit ipsam laboriosam, totam ab ducimus sint officia dolore nulla voluptatem, dignissimos ea explicabo! Velit vero deleniti saepe fugiat nulla labore.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit fugit ipsam laboriosam, totam ab ducimus sint officia dolore nulla voluptatem, dignissimos ea explicabo! Velit vero deleniti saepe fugiat nulla labore.  "}
+     image={cowImage}  
+       /> 
+    </div> */
+  )
 }
+
+export default BoardModerator
