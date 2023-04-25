@@ -8,6 +8,7 @@ import AuthService from "./services/auth.service";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
+import Api from "./components/api.component";
 import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
@@ -97,6 +98,13 @@ class App extends Component {
                 </Link>
               </li>
             )}
+              <li className="nav-item">
+              <Link to={"/Api"} className="nav-link">
+                API
+              </Link>
+              
+            </li>
+
           </div>
 
           {currentUser ? (
@@ -132,7 +140,8 @@ class App extends Component {
         <div className="container mt-3">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/Home" element={<Home />} />
+            <Route path="/Api" element={<Api />} /> y
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
