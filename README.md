@@ -117,7 +117,7 @@ AgroAPI is a RESTful web service application which provide Data/information rela
 
 ![Login](images/login.png?raw=true)
 
-#### Role Based Profile
+#### Role Based Profile ( token is sent to user for authentication & authorization )
 
 ![Role Based Profile](images/Role_Based_Profile.png?raw=true)
 
