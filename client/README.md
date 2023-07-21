@@ -1,1 +1,0 @@
-# AgroAPI frontend app
