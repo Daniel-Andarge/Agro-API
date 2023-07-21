@@ -12,7 +12,7 @@
   </a>
 </p>
 
-### 🏠 [Homepage]
+### 🏠 Homepage ![Home](images/Home.png?raw=true)
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -32,19 +32,16 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#Screen Shots">Screen Shots</a></li>
+    <li><a href="#Author">Author</a></li>
+        <li><a href="#Show your support">Show your support</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 <!--
 ### Agro-API -->
@@ -101,7 +98,7 @@ AgroAPI is a RESTful web service application which provide Data/information rela
 
 ## Usage
 
-**Open the app on your browser**
+**Open the following ports on your browser**
 
 - frontend @ [http://localhost:8081](http://localhost:8081)
 - backend is runnig @ [http://localhost:8080](http://localhost:8080)
