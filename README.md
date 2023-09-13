@@ -120,7 +120,7 @@ AgroAPI is a RESTful web service application which provide Data/information rela
 
 #### Admin SignUp From Postman 
 
-![SignUp ](images/admin sign up.png?raw=true)
+![SignUp ](images/admin_Signup.png?raw=true)
 
 #### Admin Login
 
