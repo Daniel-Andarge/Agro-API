@@ -46,7 +46,43 @@
 <!--
 ### Agro-API -->
 
-AgroAPI is a RESTful web service application which provide Data/information related to Poultry & Dairy Farming in addition to this it facilitate the supply chain of the industry through connecting farmers to buyers & farmers to farm input dealers by removing the middle mens (Brokers) from the chain.
+AgroAPI stands as a testament to my expertise in backend development, achieved through the Back-End Specialization at ALX Software Engineering program. This comprehensive portfolio project serves as a robust backend system (API) specifically designed to handle and deliver data pertaining to Poultry and Dairy Farming.
+
+Project Highlights:
+
+User Authentication: Implemented a secure and seamless user sign-up and login process using JSON Web Tokens, ensuring enhanced data protection.
+
+Access Control: Employed role-based access control mechanisms through API Authentication and Authorization, allowing precise control over user privileges.
+
+Performance Optimization: Incorporated request rate limitations and caching strategies for improved system efficiency and responsiveness.
+
+User Interface: Developed a dynamic user interface using React to enhance the overall user experience.
+
+Pagination: Implemented server-side pagination for optimized data presentation and retrieval.
+
+Documentation: Thorough API documentation ensures clarity and ease of use for developers and stakeholders.
+
+Technologies Utilized:
+
+Node.js: Leveraged for server-side JavaScript execution.
+
+Express.js: The backend framework facilitating the creation of robust APIs.
+
+React: Utilized for crafting engaging and responsive user interfaces.
+
+BootStrap: Employed to enhance UI design and responsiveness.
+
+Axios: A promise-based HTTP client for making efficient API requests.
+
+PostgreSQL: The relational database used to store and manage data.
+
+Sequelize ORM: Ensured seamless interaction with the PostgreSQL database.
+
+JWT (JSON Web Token): Implemented for secure and stateless authentication.
+
+SwaggerHub: Used for comprehensive API documentation.
+
+This project showcases my commitment to industry best practices in backend development and serves as a practical demonstration of my skills in building secure, efficient, and well-documented APIs.
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
