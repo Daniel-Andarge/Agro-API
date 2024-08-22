@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
+import React, { Component } from 'react';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
 
-import AuthService from "../services/auth.service";
+import AuthService from '../services/auth.service';
 
 import { withRouter } from '../common/with-router';
 
-const required = value => {
+const required = (value) => {
   if (!value) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -25,22 +25,22 @@ class Login extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       loading: false,
-      message: ""
+      message: '',
     };
   }
 
   onChangeUsername(e) {
     this.setState({
-      username: e.target.value
+      username: e.target.value,
     });
   }
 
   onChangePassword(e) {
     this.setState({
-      password: e.target.value
+      password: e.target.value,
     });
   }
 
@@ -48,8 +48,8 @@ class Login extends Component {
     e.preventDefault();
 
     this.setState({
-      message: "",
-      loading: true
+      message: '',
+      loading: true,
     });
 
     this.form.validateAll();
@@ -57,10 +57,10 @@ class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.username, this.state.password).then(
         () => {
-          this.props.router.navigate("/profile");
+          this.props.router.navigate('/profile');
           window.location.reload();
         },
-        error => {
+        (error) => {
           const resMessage =
             (error.response &&
               error.response.data &&
@@ -70,13 +70,13 @@ class Login extends Component {
 
           this.setState({
             loading: false,
-            message: resMessage
+            message: resMessage,
           });
         }
       );
     } else {
       this.setState({
-        loading: false
+        loading: false,
       });
     }
   }
@@ -93,7 +93,7 @@ class Login extends Component {
 
           <Form
             onSubmit={this.handleLogin}
-            ref={c => {
+            ref={(c) => {
               this.form = c;
             }}
           >
@@ -123,7 +123,7 @@ class Login extends Component {
 
             <div className="form-group">
               <button
-                className="btn btn-primary btn-block"
+                className="btn btn-success btn-block"
                 disabled={this.state.loading}
               >
                 {this.state.loading && (
@@ -141,8 +141,8 @@ class Login extends Component {
               </div>
             )}
             <CheckButton
-              style={{ display: "none" }}
-              ref={c => {
+              style={{ display: 'none' }}
+              ref={(c) => {
                 this.checkBtn = c;
               }}
             />
