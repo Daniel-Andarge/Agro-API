@@ -145,12 +145,20 @@ In addition, it streamlines the industry’s supply chain by directly connecting
 ![Admin Login](images/AdminLogin.png?raw=true)
 ![Admin Home](images/adminHome.png?raw=true)
 
-### Role Based Profile : User Info & provided Access Token
+### Role-Based Profile Screenshot: User Information & Assigned Access Token
 
 ![Admin Profile](images/adminBoard.png?raw=true)
 ![User Profile](images/Role_Based_Profile.png?raw=true)
 
-### Role Based Content
+### Role-Based Content Screenshots: Customized Content Visibility by User Role
+
+![Admin Content](images/admin2.png?raw=true)
+![Admin Moderator Content](images/admin3.png?raw=true)
+![User Content](images/Role_Based_Content.png?raw=true)
+
+---
+
+### Database Screenshot: Password Encryption Implemented
 
 ![Admin Content](images/admin2.png?raw=true)
 ![Admin Moderator Content](images/admin3.png?raw=true)
@@ -162,7 +170,6 @@ In addition, it streamlines the industry’s supply chain by directly connecting
 
 👤 **Daniel Andarge**
 
-- Twitter: [@DanielAndarge](https://twitter.com/DanielAndarge)
 - LinkedIn: [Daniel Andarge](https://www.linkedin.com/in/danielandarge/)
 
 ---
