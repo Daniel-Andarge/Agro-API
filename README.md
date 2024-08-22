@@ -35,7 +35,8 @@
 ---
 
 ## About The Project
-AgroAPI is a RESTful web service application that provides data and information related to poultry and dairy farming. 
+
+AgroAPI is a RESTful web service application that provides data and information related to poultry and dairy farming.
 In addition, it streamlines the industry’s supply chain by directly connecting farmers with buyers and farm input dealers, effectively eliminating middlemen (brokers) from the process
 
 ### Project Highlights:
@@ -144,7 +145,7 @@ In addition, it streamlines the industry’s supply chain by directly connecting
 ![Admin Login](images/AdminLogin.png?raw=true)
 ![Admin Home](images/adminHome.png?raw=true)
 
-### Role Based Profile
+### Role Based Profile : User Info & provided Access Token
 
 ![Admin Profile](images/adminBoard.png?raw=true)
 ![User Profile](images/Role_Based_Profile.png?raw=true)
