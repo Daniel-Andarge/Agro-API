@@ -160,9 +160,7 @@ In addition, it streamlines the industry’s supply chain by directly connecting
 
 ### Database Screenshot: Password Encryption Implemented
 
-![Admin Content](images/admin2.png?raw=true)
-![Admin Moderator Content](images/admin3.png?raw=true)
-![User Content](images/Role_Based_Content.png?raw=true)
+![Database](https://github.com/Daniel-Andarge/Agro-API/blob/main/images/database.png)
 
 ---
 
