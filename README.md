@@ -35,8 +35,8 @@
 ---
 
 ## About The Project
-
-AgroAPI is a comprehensive backend system developed as part of my Back-End Specialization at ALX Software Engineering. This API is designed to efficiently manage and deliver data related to Poultry and Dairy Farming.
+AgroAPI is a RESTful web service application that provides data and information related to poultry and dairy farming. 
+In addition, it streamlines the industry’s supply chain by directly connecting farmers with buyers and farm input dealers, effectively eliminating middlemen (brokers) from the process
 
 ### Project Highlights:
 
