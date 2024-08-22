@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import React, { Component } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
-import AuthService from "./services/auth.service";
+import AuthService from './services/auth.service';
 
-import Login from "./components/login.component";
-import Register from "./components/register.component";
-import Home from "./components/home.component";
-import Api from "./components/api.component";
-import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
-import BoardModerator from "./components/board-moderator.component";
-import BoardAdmin from "./components/board-admin.component";
+import Login from './components/login.component';
+import Register from './components/register.component';
+import Home from './components/home.component';
+import Api from './components/api.component';
+import Profile from './components/profile.component';
+import BoardUser from './components/board-user.component';
+import BoardModerator from './components/board-moderator.component';
+import BoardAdmin from './components/board-admin.component';
 
 // import AuthVerify from "./common/auth-verify";
-import EventBus from "./common/EventBus";
+import EventBus from './common/EventBus';
 
 class App extends Component {
   constructor(props) {
@@ -35,18 +35,18 @@ class App extends Component {
     if (user) {
       this.setState({
         currentUser: user,
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        showModeratorBoard: user.roles.includes('ROLE_MODERATOR'),
+        showAdminBoard: user.roles.includes('ROLE_ADMIN'),
       });
     }
-    
-    EventBus.on("logout", () => {
+
+    EventBus.on('logout', () => {
       this.logOut();
     });
   }
 
   componentWillUnmount() {
-    EventBus.remove("logout");
+    EventBus.remove('logout');
   }
 
   logOut() {
@@ -63,21 +63,23 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/"} className="navbar-brand">
-           AgroAPI
+        <nav
+          className="navbar navbar-expand navbar-dark"
+          style={{ backgroundColor: '#28a745' }}
+        >
+          <Link to={'/'} className="navbar-brand">
+            AgroAPI
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
+              <Link to={'/home'} className="nav-link">
                 Home
               </Link>
-              
             </li>
 
             {showModeratorBoard && (
               <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
+                <Link to={'/mod'} className="nav-link">
                   Moderator Board
                 </Link>
               </li>
@@ -85,7 +87,7 @@ class App extends Component {
 
             {showAdminBoard && (
               <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
+                <Link to={'/admin'} className="nav-link">
                   Admin Board
                 </Link>
               </li>
@@ -93,24 +95,22 @@ class App extends Component {
 
             {currentUser && (
               <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
+                <Link to={'/user'} className="nav-link">
                   User
                 </Link>
               </li>
             )}
-              <li className="nav-item">
-              <Link to={"/Api"} className="nav-link">
+            <li className="nav-item">
+              <Link to={'/Api'} className="nav-link">
                 API
               </Link>
-              
             </li>
-
           </div>
 
           {currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
+                <Link to={'/profile'} className="nav-link">
                   {currentUser.username}
                 </Link>
               </li>
@@ -123,13 +123,13 @@ class App extends Component {
           ) : (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
+                <Link to={'/login'} className="nav-link">
                   Login
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
+                <Link to={'/register'} className="nav-link">
                   Sign Up
                 </Link>
               </li>

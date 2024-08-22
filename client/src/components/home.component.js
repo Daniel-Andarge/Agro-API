@@ -1,33 +1,31 @@
-import React, { Component } from "react";
-
-import UserService from "../services/user.service";
-
-import Banner from "./banner";
-import cow from "../assets/cow.JPG"
-import poulty from "../assets/poulty.png"
+import React, { Component } from 'react';
+import UserService from '../services/user.service';
+import Banner from './banner';
+import cow from '../assets/cow.JPG';
+import poultry from '../assets/poulty.png';
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      content: ""
+      content: '',
     };
   }
 
   componentDidMount() {
     UserService.getPublicContent().then(
-      response => {
+      (response) => {
         this.setState({
-          content: response.data
+          content: response.data,
         });
       },
-      error => {
+      (error) => {
         this.setState({
           content:
             (error.response && error.response.data) ||
             error.message ||
-            error.toString()
+            error.toString(),
         });
       }
     );
@@ -35,28 +33,26 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid mt-3">
         <header className="jumbotron">
-        <h1>Welcome to AgroAPI </h1>
-          {/* <h3>{this.state.content}</h3> */}
-       
-
+          <h1>AGRO API</h1>
+          <br></br>
+          <h2>Empowering Agriculture, Simplifying Supply Chains</h2>
         </header>
-        <Banner
-          head1="Who we "
-          head2="are"
-          content={"AgroAPI is an agricultural focused web service on Poultry Farming sector in Ethiopia, In Ethiopia The poultry value chain is very fragmented and at its early stage.  AgroAPI is developed considering this problem , It provides data or  information related to Poultry Farming in Ethiopia through APIs  for developers who want to build agricultural websites or applications and for individuals or organizations who want to make a research."}
-          image={poulty}  
-       /> 
 
-<Banner
+        <Banner
+          head1="ABOUT"
+          content="AgroAPI is an agricultural-focused web service specializing in the Poultry Farming sector in Ethiopia. The poultry value chain in Ethiopia is fragmented and in its early stages. AgroAPI was developed to address these challenges. It provides data and information related to Poultry Farming in Ethiopia through APIs, supporting developers, researchers, and organizations."
+          image={poultry}
+        />
+
+        <Banner
           head1="Dairy"
           head2="Farming"
-          content={"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit fugit ipsam laboriosam, totam ab ducimus sint officia dolore nulla voluptatem, dignissimos ea explicabo! Velit vero deleniti saepe fugiat nulla labore.  "}
-          image={cow}  
-       /> 
+          content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit fugit ipsam laboriosam, totam ab ducimus sint officia dolore nulla voluptatem, dignissimos ea explicabo! Velit vero deleniti saepe fugiat nulla labore."
+          image={cow}
+        />
       </div>
-      
     );
   }
 }

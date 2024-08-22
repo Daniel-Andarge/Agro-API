@@ -1,18 +1,20 @@
-import React from 'react'
+import React from 'react';
 
 function Banner(props) {
   return (
-    <div className='container'>
-        <div className='banner'>
-        <div className='content'>
-            <h1>{props.head1}<span>{props.head2} </span> </h1>
-            <p className='mt-2'>{props.content}</p>
-
+    <div className="container-fluid mt-3">
+      <div className="banner">
+        <div className="content">
+          <h1>
+            {props.head1}
+            <span>{props.head2} </span>{' '}
+          </h1>
+          <p className="mt-2">{props.content}</p>
         </div>
-    <img className='img' src={props.image} alt=""/>
+        <img className="img" src={props.image} alt="" />
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default Banner
+export default Banner;

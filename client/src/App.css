@@ -1,38 +1,36 @@
 label {
   display: block;
   margin-top: 10px;
+  font-weight: bold;
+  color: #333;
 }
 
-.card-container.card {
-  max-width: 350px !important;
-  padding: 40px 40px;
+.card-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .card {
-  background-color: #f7f7f7;
-  padding: 20px 25px 30px;
-  margin: 0 auto 25px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-top: 50px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 .profile-img-card {
-  width: 96px;
-  height: 96px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto 10px;
   display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
   border-radius: 50%;
+  overflow: hidden;
 }
 
 .App {
-  text-align: center;
+  /*text-align: center;*/
+  padding: 0;
 }
 
 .form {
@@ -40,10 +38,103 @@ label {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
 }
 
 .form input {
-  width: 250px;
-  height: 20px;
+  width: 100%;
+  max-width: 300px;
+  height: 40px;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.profile-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card {
+  text-align: center;
+}
+
+.profile-header {
+  padding: 20px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 20px;
+}
+
+.profile-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.profile-details p {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+  word-break: break-all;
+}
+
+.profile-details strong {
+  color: #333;
+}
+
+.token {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.authorities-list {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.authority-item {
+  display: inline-block;
+  padding: 5px 10px;
   margin: 5px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+@media screen and (max-width: 600px) {
+  .profile-container {
+    padding: 15px;
+  }
+
+  .profile-header {
+    padding: 15px;
+  }
+
+  .profile-title {
+    font-size: 20px;
+  }
+
+  .profile-details p {
+    font-size: 14px;
+  }
+
+  .authority-item {
+    font-size: 12px;
+  }
 }
