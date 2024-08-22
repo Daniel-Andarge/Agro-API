@@ -192,7 +192,3 @@ Copyright © 2023 [Daniel Andarge](https://github.com/Daniel-Andarge).
 [PostgreSQL-url]: https://www.postgresql.org
 [SequelizeORM]: https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white
 [Sequelize-url]: https://sequelize.org
-
----
-
-This layout is designed to be engaging and easy to navigate, with a focus on visual appeal and clarity.
