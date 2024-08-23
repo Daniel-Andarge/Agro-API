@@ -40,7 +40,8 @@ AgroAPI is a RESTful web service application that provides data and information 
 In addition, it streamlines the industry’s supply chain by directly connecting farmers with buyers and farm input dealers, effectively eliminating middlemen (brokers) from the process
 
 
-**NOTE:** The primary focus of this project is to implement best practices in back-end development, The front-end has been designed primarily to facilitate interaction with the back-end. However, it can be enhanced or improved as needed.
+### NOTE:
+The primary focus of this project is to implement best practices in back-end development, The front-end has been designed primarily to facilitate interaction with the back-end. However, it can be enhanced or improved as needed.
 
 ### Project Highlights:
 
