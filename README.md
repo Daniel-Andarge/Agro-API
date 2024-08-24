@@ -184,7 +184,8 @@ If you find this project useful, give it a ⭐️!
 
 ## 📝 License
 
-Copyright © 2023 [Daniel Andarge](https://github.com/Daniel-Andarge).
+This project is licensed under the [MIT License](LICENSE). See the full text of the [LICENSE](LICENSE) file for details.
+
 
 ---
 
