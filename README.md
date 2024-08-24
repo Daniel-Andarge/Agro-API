@@ -124,7 +124,6 @@ The primary focus of this project is to implement best practices in back-end dev
 - Frontend @ [http://localhost:8081](http://localhost:8081)
 - Backend @ [http://localhost:8080](http://localhost:8080)
 
----
 
 ## Screen Shots
 
@@ -160,34 +159,36 @@ The primary focus of this project is to implement best practices in back-end dev
 ![Admin Moderator Content](images/admin3.png?raw=true)
 ![User Content](images/Role_Based_Content.png?raw=true)
 
----
 
 ### Database Screenshot: Password Encryption Implemented
 
 ![Database](https://github.com/Daniel-Andarge/Agro-API/blob/main/images/database.png)
 
----
-
-## Author
-
-👤 **Daniel Andarge**
-
-- LinkedIn: [Daniel Andarge](https://www.linkedin.com/in/danielandarge/)
-
----
 
 ## Show Your Support
 
 If you find this project useful, give it a ⭐️!
 
+### Contributing
+
+While this project is primarily a portfolio piece and not open for external contributions, feedback and suggestions are always welcome. If you have any thoughts or comments, reach out via [email](mailto:andargedaniel90@gmail.com) or [LinkedIn](https://www.linkedin.com/in/danielandarge/).
+
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+### Contact
+
+- **Email**: [Send Message](mailto:andargedaniel90@gmail.com)
+- **LinkedIn**: [Daniel Andarge](https://www.linkedin.com/in/danielandarge/)
+
+### Author
+
+👤 **Daniel Andarge**
+
 ---
 
-## 📝 License
-
-This project is licensed under the [MIT License](LICENSE). See the full text of the [LICENSE](LICENSE) file for details.
-
-
----
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
