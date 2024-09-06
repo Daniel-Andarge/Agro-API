@@ -38,6 +38,12 @@
 
 AgroAPI is a RESTful web service designed to function as a backend solution for B2B applications in the poultry and dairy farming sectors. Developed as part of my capstone project for the ALX-Africa Software Engineering program, with a focus on backend development, AgroAPI enhances the agricultural supply chain by directly linking farmers with buyers and farm input providers. By eliminating intermediaries, the platform improves operational efficiency and promotes greater transparency across the industry.
 
+### Problem Statement:
+
+Ethiopia's poultry and dairy farming sectors face significant inefficiencies due to a fragmented supply chain, reliance on middlemen, and limited access to reliable market data. Farmers often struggle to connect directly with buyers and farm input suppliers, resulting in reduced profit margins, inconsistent pricing, and delays in accessing essential resources. The lack of an integrated digital solution exacerbates these challenges, making it difficult for farmers to scale their operations or compete effectively in the market.
+
+To address these issues, AgroAPI was developed as a backend service tailored to the Ethiopian poultry and dairy farming industries. By directly linking farmers with buyers and farm input suppliers through a B2B platform, AgroAPI aims to eliminate intermediaries, streamline supply chain operations, and improve access to real-time market data. This solution enhances transparency, increases operational efficiency, and helps Ethiopian farmers achieve sustainable growth in an increasingly competitive market.
+
 ### NOTE:
 The primary focus of this project is to implement best practices in back-end development, The front-end has been designed primarily to facilitate interaction with the back-end. However, it can be enhanced or improved as needed.
 
