@@ -44,9 +44,6 @@ Ethiopia's poultry and dairy farming sectors face significant inefficiencies due
 
 To address these issues, AgroAPI was developed as a backend service tailored to the Ethiopian poultry and dairy farming industries. By directly linking farmers with buyers and farm input suppliers through a B2B platform, AgroAPI aims to eliminate intermediaries, streamline supply chain operations, and improve access to real-time market data. This solution enhances transparency, increases operational efficiency, and helps Ethiopian farmers achieve sustainable growth in an increasingly competitive market.
 
-### NOTE:
-The primary focus of this project is to implement best practices in back-end development, The front-end has been designed primarily to facilitate interaction with the back-end. However, it can be enhanced or improved as needed.
-
 ### Project Highlights:
 
 - **User Authentication:** Secure sign-up and login with JSON Web Tokens for enhanced data protection.
